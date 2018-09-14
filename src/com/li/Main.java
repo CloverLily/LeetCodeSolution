@@ -55,6 +55,7 @@ class Solution7 {
 
 /**
  * 9 回文数
+ *
  */
 class Solution9 {
     public static boolean isPalindrome(int x) {
