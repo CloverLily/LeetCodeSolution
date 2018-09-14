@@ -32,6 +32,7 @@ class Solution {
 
 /**
  * 7 反转整数
+ *
  */
 class Solution7 {
     private static int reverse(int x) {
