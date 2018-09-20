@@ -6,10 +6,33 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        System.out.println(" "+'b'+1);
+        //System.out.println(" "+'b'+1);
+        String[] i={"0","2","5","7"};
+        //System.out.println(i[0]+i[1]+i[2] +i[3]);
+        int seg=(int)(Math.random()*3);
+        System.out.println(seg);
 
     }
 }
+
+
+class A{
+    private int a;
+
+    private int getA(){
+        return a;
+    }
+
+}
+
+class B extends A{
+
+    public int b;
+
+
+
+}
+
 
 
 
