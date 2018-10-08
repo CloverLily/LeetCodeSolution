@@ -29,7 +29,6 @@ class B extends A {
 
     public int b;
 
-
 }
 
 
@@ -108,18 +107,17 @@ class TestABC {
     public static int i = 0;
     public static String s = "全局静态变量";
 
-    public TestABC() {
-        i = 3;
-        s = "构造方法";
-        System.out.println(s);
-    }
-
     {
         i = 2;
         s = "实例初始化";
         System.out.println(s);
     }
 
+    public TestABC() {
+        i = 3;
+        s = "构造方法";
+        System.out.println(s);
+    }
 
     static {
         i = 1;
