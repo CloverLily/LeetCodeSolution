@@ -11,6 +11,7 @@ public class Main {
         //System.out.println(i[0]+i[1]+i[2] +i[3]);
         int seg = (int) (Math.random() * 3);
         System.out.println(seg);
+        Integer.toHexString(1);
 
     }
 }
