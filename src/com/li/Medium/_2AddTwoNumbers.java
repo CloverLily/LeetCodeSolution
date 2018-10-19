@@ -12,7 +12,7 @@ public class _2AddTwoNumbers {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int sumVal = l1.val + l2.val;
-        int carry = 0;
+        int carry = 0;//进位
         if (sumVal >= 10) {
             carry = sumVal / 10;
             sumVal -= 10;
