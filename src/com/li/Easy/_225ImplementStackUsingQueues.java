@@ -1,11 +1,7 @@
 package com.li.Easy;
 
 import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Queue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 两个队列实现栈
