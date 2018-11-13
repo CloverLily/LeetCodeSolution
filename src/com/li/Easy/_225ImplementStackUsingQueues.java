@@ -1,6 +1,11 @@
 package com.li.Easy;
 
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 两个队列实现栈
@@ -31,10 +36,13 @@ public class _225ImplementStackUsingQueues {
          * Initialize your data structure here.
          */
         public MyStack() {
+            queue1 = new ArrayDeque<Integer>();
+            queue2 = new ArrayDeque<Integer>();
         }
 
         /**
          * Push element x onto stack.
+         * 模拟入栈
          */
         public void push(int x) {
             if (empty() || queue1.isEmpty()) {
@@ -49,21 +57,43 @@ public class _225ImplementStackUsingQueues {
          * 模拟移除栈顶元素
          */
         public int pop() {
-            while (!queue1.isEmpty()) {
-                queue2.add(queue1.remove());
+            //找到非空队列
+            Queue<Integer> queue, emptyQueue;
+            queue = queue1.isEmpty() ? queue2 : queue1;
+            emptyQueue = queue1.isEmpty() ? queue1 : queue2;
+
+            if (queue == null) {
+                return -1;
             }
-            return queue2.remove();
-//            while (!queue2.isEmpty()) {
-//                queue1.add(queue2.remove());
-//            }
+
+            while (!queue.isEmpty()) {
+                top = queue.poll();
+                if (queue.peek() != null) {
+                    emptyQueue.offer(top);
+                }
+            }
+            return top;
         }
 
         /**
          * Get the top element.
+         * 模拟获取栈顶元素
          */
         public int top() {
-            return 0;
+            //找到非空队列
+            Queue<Integer> queue, emptyQueue;
+            queue = queue1.isEmpty() ? queue2 : queue1;
+            emptyQueue = queue1.isEmpty() ? queue1 : queue2;
 
+            if (queue == null) {
+                return -1;
+            }
+
+            while (!queue.isEmpty()) {
+                top = queue.poll();
+                emptyQueue.offer(top);
+            }
+            return top;
         }
 
         /**
