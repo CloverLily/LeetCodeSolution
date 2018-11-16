@@ -6,7 +6,9 @@ package com.li.Easy;
  */
 class _9PalindromeNumber {
     public static boolean isPalindrome(int x) {
+        //个位数一定是回文数
         if (x >= 0 && x <= 9) return true;
+        //负数或者10的倍数一定不是回文数
         if (x < 0 || x % 10 == 0) return false;
 
         int rev = 0;
@@ -22,6 +24,16 @@ class _9PalindromeNumber {
     }
 
     public static void main(String[] args) {
+        //个位数
+        System.out.println(isPalindrome(6));
+        //10的倍数
         System.out.println(isPalindrome(10));
+        //负数
+        System.out.println(isPalindrome(-5));
+        //普通情况不是回文数
+        System.out.println(isPalindrome(12345));
+        //普通情况是回文数
+        System.out.println(isPalindrome(1234321));
+        System.out.println(isPalindrome(123321));
     }
 }

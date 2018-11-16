@@ -9,11 +9,13 @@ class _14LongestCommonPrefix {
     public static String longestCommonPrefix(String[] strs) {
         if (strs == null || strs.length == 0) return "";
 
+        //若字符数组中存在空字符，则该数组不存在最长公共前缀
         for (String s : strs) {
             if (s == null || s.length() == 0)
                 return "";
         }
 
+        //若数组中只有一个元素，则该元素即为最长公共前缀
         if (strs.length == 1) return strs[0];
 
         String prefix = strs[0];
@@ -47,8 +49,8 @@ class _14LongestCommonPrefix {
         String[] strs = {"flower", "flow", "flight"};
         String[] strs2 = {"dog", "racecar", "car"};
         String[] strs3 = {"ca", "a"};
-        System.out.println(longestCommonPrefix(strs3));
-        // System.out.println(longestCommonPrefix(new String[]{""}));
+        System.out.println("空："+longestCommonPrefix(strs3)+"\nfl:"+longestCommonPrefix(strs)+"\n空："+longestCommonPrefix(strs2));
+        System.out.println("空："+longestCommonPrefix(new String[]{""}));
     }
 
 }
