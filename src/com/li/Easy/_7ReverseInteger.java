@@ -21,6 +21,7 @@ class _7ReverseInteger {
         return rev;
     }
 
+    //测试
     public static void main(String[] args) {
         //翻转后正常
         System.out.println(reverse(123456789));

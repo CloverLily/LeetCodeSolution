@@ -11,8 +11,9 @@ class _14LongestCommonPrefix {
 
         //若字符数组中存在空字符，则该数组不存在最长公共前缀
         for (String s : strs) {
-            if (s == null || s.length() == 0)
+            if (s == null || s.length() == 0){
                 return "";
+            }
         }
 
         //若数组中只有一个元素，则该元素即为最长公共前缀
@@ -45,6 +46,7 @@ class _14LongestCommonPrefix {
         }
     }
 
+    //测试
     public static void main(String[] args) {
         String[] strs = {"flower", "flow", "flight"};
         String[] strs2 = {"dog", "racecar", "car"};

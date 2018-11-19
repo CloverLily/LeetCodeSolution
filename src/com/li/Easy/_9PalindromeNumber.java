@@ -23,6 +23,7 @@ class _9PalindromeNumber {
         return false;
     }
 
+    //测试
     public static void main(String[] args) {
         //个位数
         System.out.println(isPalindrome(6));
