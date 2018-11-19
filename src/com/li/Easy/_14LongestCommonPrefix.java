@@ -49,8 +49,10 @@ class _14LongestCommonPrefix {
         String[] strs = {"flower", "flow", "flight"};
         String[] strs2 = {"dog", "racecar", "car"};
         String[] strs3 = {"ca", "a"};
-        System.out.println("空："+longestCommonPrefix(strs3)+"\nfl:"+longestCommonPrefix(strs)+"\n空："+longestCommonPrefix(strs2));
-        System.out.println("空："+longestCommonPrefix(new String[]{""}));
+        System.out.println("空：" + longestCommonPrefix(strs3) +
+                "\nfl:" + longestCommonPrefix(strs) +
+                "\n空：" + longestCommonPrefix(strs2));
+        System.out.println("空：" + longestCommonPrefix(new String[]{""}));
     }
 
 }
