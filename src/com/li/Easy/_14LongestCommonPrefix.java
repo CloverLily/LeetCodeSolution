@@ -20,8 +20,8 @@ class _14LongestCommonPrefix {
         if (strs.length == 1) return strs[0];
 
         String prefix = strs[0];
-        for (int i = 0; i < strs.length - 1; i++) {
-            prefix = commonPrefix(prefix, strs[i + 1]);
+        for (int i = 1; i < strs.length ; i++) {
+            prefix = commonPrefix(prefix, strs[i]);
         }
         return prefix;
 
