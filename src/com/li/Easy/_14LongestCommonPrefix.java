@@ -9,15 +9,15 @@ class _14LongestCommonPrefix {
     public static String longestCommonPrefix(String[] strs) {
         if (strs == null || strs.length == 0) return "";
 
+        //若数组中只有一个元素，则该元素即为最长公共前缀
+        if (strs.length == 1) return strs[0];
+
         //若字符数组中存在空字符，则该数组不存在最长公共前缀
         for (String s : strs) {
             if (s == null || s.length() == 0){
                 return "";
             }
         }
-
-        //若数组中只有一个元素，则该元素即为最长公共前缀
-        if (strs.length == 1) return strs[0];
 
         String prefix = strs[0];
         for (int i = 1; i < strs.length ; i++) {
