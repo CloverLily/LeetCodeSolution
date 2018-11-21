@@ -14,13 +14,13 @@ class _14LongestCommonPrefix {
 
         //若字符数组中存在空字符，则该数组不存在最长公共前缀
         for (String s : strs) {
-            if (s == null || s.length() == 0){
+            if (s == null || s.length() == 0) {
                 return "";
             }
         }
 
         String prefix = strs[0];
-        for (int i = 1; i < strs.length ; i++) {
+        for (int i = 1; i < strs.length; i++) {
             prefix = commonPrefix(prefix, strs[i]);
         }
         return prefix;
@@ -36,14 +36,7 @@ class _14LongestCommonPrefix {
                 break;
             }
         }
-
-        if (prefix == null || prefix.length() == 0) {
-            return "";
-        } else if (prefix.length() > len) {
-            return prefix.substring(0, len);
-        } else {
-            return prefix;
-        }
+        return prefix;
     }
 
     //测试
