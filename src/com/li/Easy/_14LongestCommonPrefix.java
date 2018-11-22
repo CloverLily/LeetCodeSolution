@@ -29,22 +29,21 @@ class _14LongestCommonPrefix {
 
     private static String commonPrefix(String str1, String str2) {
         String prefix = str1;
-        int len = Math.min(str1.length(), str2.length());
-        for (int i = 0; i < len; i++) {
+        int minLen = Math.min(str1.length(), str2.length());
+        for (int i = 0; i < minLen; i++) {
             if (prefix.charAt(i) != str2.charAt(i)) {
-                prefix = prefix.substring(0, i);
-                break;
+                return prefix.substring(0, i);
             }
         }
-        return prefix;
+        return prefix.substring(0,minLen);
     }
 
     //测试
     public static void main(String[] args) {
         String[] strs = {"flower", "flow", "flight"};
         String[] strs2 = {"dog", "racecar", "car"};
-        String[] strs3 = {"ca", "a"};
-        System.out.println("空：" + longestCommonPrefix(strs3) +
+        String[] strs3 = {"aa", "a"};
+        System.out.println("a：" + longestCommonPrefix(strs3) +
                 "\nfl:" + longestCommonPrefix(strs) +
                 "\n空：" + longestCommonPrefix(strs2));
         System.out.println("空：" + longestCommonPrefix(new String[]{""}));
