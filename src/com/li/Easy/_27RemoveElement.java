@@ -7,7 +7,7 @@ package com.li.Easy;
  * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
  */
 public class _27RemoveElement {
-    //如果存在等于val的值，则用末端的数值覆盖该值
+    //如果存在等于val的值，则用尾端的数值覆盖该值
     public static int removeElement(int[] nums, int val) {
         int len = nums.length;
         if (nums == null || len == 0) return 0;
