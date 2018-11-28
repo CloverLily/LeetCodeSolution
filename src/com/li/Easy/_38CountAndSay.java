@@ -22,64 +22,34 @@ import java.util.List;
  */
 public class _38CountAndSay {
 
-    private static String[] countArr = new String[30];
-
-
     public static void main(String[] args) {
         System.out.println(countAndSay(5));
     }
 
     public static String countAndSay(int n) {
-        countArr[0] = "1";
-        countArr[1] = "11";
-
-        if (n == 1) {
-            return "1";
-        } else if (n == 2) {
-            return "11";
+        if (n == 1) return "1";
+        String say = "1";
+        for (int i = 1; i < n; i++) {
+            String temp = count(say);
+            say = temp;
         }
-
-        return getCount(n);
-    }
-
-    private static String getCount(int n) {
-        while (countArr[n - 1] == null) {
-            if (countArr[n - 2] != null) {
-                countArr[n - 1] = count(countArr[n - 2]);
-            } else {
-                countArr[n - 2] = getCount(n - 1);
-            }
-        }
-
-        return countArr[n - 1];
+        return say;
     }
 
     private static String count(String s) {
-        char[] sChar = s.toCharArray();
-        StringBuffer countStr = new StringBuffer();
-
-        int i = 0;
-        int j = i + 1;
+        StringBuilder countStr = new StringBuilder();
+        char sub = s.charAt(0);
         int count = 1;
-        while (i < sChar.length) {
-            if (i == sChar.length - 1) {
-                countStr.append(count);
-                countStr.append(sChar[i]);
-            } else if (j<sChar.length && sChar[i] == sChar[j]) {
-                count++;
-                j++;//有问题，走到头需要计数
-                if (j >= sChar.length) {
-                    countStr.append(count);
-                    countStr.append(sChar[i]);
-                }
-            } else {
-                countStr.append(count);
-                countStr.append(sChar[i]);
+        for (int i = 1; i < s.length(); i++) {
+            if (sub != s.charAt(i)) {
+                countStr.append(count).append(sub);
+                sub = s.charAt(i);
                 count = 1;
-                i = j;
-                j = i + 1;
+            } else {
+                count++;
             }
         }
+        countStr.append(count).append(sub);
         return countStr.toString();
     }
 }
