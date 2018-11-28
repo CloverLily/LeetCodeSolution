@@ -10,17 +10,7 @@ package com.li.Easy;
  * 输入：1->2->4, 1->3->4
  * 输出：1->1->2->3->4->4
  */
-
-/**
- * 单向链表
- * Definition for singly-linked list.
- * public class ListNode {
- * int val;
- * ListNode next;
- * ListNode(int x) { val = x; }
- * }
- */
-class _21MergeTwoSortedLists {
+public class _021MergeTwoSortedLists {
 
     public static void main(String[] args) {
         //1->2->4
@@ -47,6 +37,7 @@ class _21MergeTwoSortedLists {
 
     /**
      * 合并两个链表
+     *
      * @param l1 链表1
      * @param l2 链表2
      * @return 按从小到大顺序合并的链表
@@ -61,10 +52,18 @@ class _21MergeTwoSortedLists {
             l2.next = mergeTwoLists(l1, l2.next);
             return l2;
         }
-
     }
 }
 
+/**
+ * 单向链表
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode(int x) { val = x; }
+ * }
+ */
 class ListNode {
     int val;
     ListNode next;
@@ -73,3 +72,4 @@ class ListNode {
         val = x;
     }
 }
+

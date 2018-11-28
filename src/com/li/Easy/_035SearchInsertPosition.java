@@ -6,7 +6,7 @@ package com.li.Easy;
  * 如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
  * 你可以假设数组中无重复元素。
  */
-public class _35SearchInsertPosition {
+public class _035SearchInsertPosition {
     public static int searchInsert(int[] nums, int target) {
         return binarySearch(nums, 0, nums.length - 1, target);
     }

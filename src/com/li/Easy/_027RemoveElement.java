@@ -6,7 +6,7 @@ package com.li.Easy;
  * 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
  * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
  */
-public class _27RemoveElement {
+public class _027RemoveElement {
     //如果存在等于val的值，则用尾端的数值覆盖该值
     public static int removeElement(int[] nums, int val) {
         int len = nums.length;

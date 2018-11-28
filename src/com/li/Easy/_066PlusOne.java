@@ -20,7 +20,7 @@ package com.li.Easy;
  * 输出: [4,3,2,2]
  * 解释: 输入数组表示数字 4321。
  */
-public class _66PlusOne {
+public class _066PlusOne {
 
     public static int[] plusOne(int[] digits) {
         int len = digits.length;

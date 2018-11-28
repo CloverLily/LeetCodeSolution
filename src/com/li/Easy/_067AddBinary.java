@@ -19,7 +19,7 @@ import java.util.List;
  * 输入: a = "1010", b = "1011"
  * 输出: "10101"
  */
-public class _67AddBinary {
+public class _067AddBinary {
 
     public String addBinary(String a, String b) {
 

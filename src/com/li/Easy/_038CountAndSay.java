@@ -20,7 +20,7 @@ import java.util.List;
  * <p>
  * 注意：整数顺序将表示为一个字符串。
  */
-public class _38CountAndSay {
+public class _038CountAndSay {
 
     public static void main(String[] args) {
         System.out.println(countAndSay(5));
