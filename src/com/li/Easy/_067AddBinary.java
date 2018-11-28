@@ -46,4 +46,15 @@ public class _067AddBinary {
 
         return null;
     }
+
+    public String addBinary2(String a, String b) {
+        int maxLen = Math.max(a.length(), b.length());
+        int minLen = Math.min(a.length(), b.length());
+
+        for (int i = minLen-1; i >=0 ; i--) {
+
+        }
+
+        return null;
+    }
 }
