@@ -1,10 +1,6 @@
 package com.li.Easy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- *
  * 67. 二进制求和
  * 给定两个二进制字符串，返回他们的和（用二进制表示）。
  * <p>
@@ -21,40 +17,34 @@ import java.util.List;
  */
 public class _067AddBinary {
 
-    public String addBinary(String a, String b) {
-
-        int maxLen = Math.max(a.length(), b.length());
-        int minLen = Math.min(a.length(), b.length());
-        //存放二进制相加后结果集
-        int[] binarySum = new int[maxLen + 1];
-        List l = new ArrayList();
-        int sum = 0;
-        int carry = 0;
-        for (int i = minLen - 1; i >= 0; i--) {
-            sum = a.charAt(i) + b.charAt(i) + carry;
-            if (sum != 2) {
-                binarySum[i + 1] = sum;
-            }
-            binarySum[i + 1] = 0;
-            carry = 1;
-
-        }
-
-//        for (int j = maxLen - minLen - 1; j >) {
-//
-//        }
-
-        return null;
+    public static void main(String[] args) {
+        System.out.println(addBinary("111", "101"));
     }
 
-    public String addBinary2(String a, String b) {
-        int maxLen = Math.max(a.length(), b.length());
-        int minLen = Math.min(a.length(), b.length());
+    /**
+     * 返回二进制相加的结果
+     *
+     * @param a 二进制数a
+     * @param b 二进制数b
+     * @return 二进制相加
+     */
+    public static String addBinary(String a, String b) {
+        //a的指针，b的指针，进位
+        int i = a.length() - 1, j = b.length() - 1, carry = 0;
+        int length = Math.max(a.length(), b.length());
 
-        for (int i = minLen-1; i >=0 ; i--) {
+        int bin1, bin2, sum;
+        char[] result = new char[length];
+        result[0] = 0;
+
+        while (length > 0) {
+            bin1 = i < 0 ? 0 : a.charAt(i--) - '0';
+            bin2 = j < 0 ? 0 : b.charAt(j--) - '0';
+            sum = bin1 + bin2 + carry;
+            result[--length] = (char) (sum % 2);
+            carry = sum / 2;
 
         }
-
-        return null;
+        return new String(result);
     }
 }
