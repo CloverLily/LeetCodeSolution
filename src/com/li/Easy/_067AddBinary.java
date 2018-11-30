@@ -35,16 +35,18 @@ public class _067AddBinary {
 
         int bin1, bin2, sum;
         char[] result = new char[length];
-        result[0] = 0;
-
         while (length > 0) {
             bin1 = i < 0 ? 0 : a.charAt(i--) - '0';
             bin2 = j < 0 ? 0 : b.charAt(j--) - '0';
             sum = bin1 + bin2 + carry;
-            result[--length] = (char) (sum % 2);
+            result[--length] = (char) ('0' + sum % 2);
             carry = sum / 2;
 
         }
-        return new String(result);
+        String resultStr = new String(result);
+        if (carry == 1) {
+            resultStr = "1" + resultStr;
+        }
+        return resultStr;
     }
 }
