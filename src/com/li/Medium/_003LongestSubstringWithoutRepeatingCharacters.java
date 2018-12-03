@@ -1,6 +1,8 @@
 package com.li.Medium;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -38,34 +40,57 @@ public class _003LongestSubstringWithoutRepeatingCharacters {
         if (s.trim().length() == 0) {
             return 1;
         }
-        int i = 0, j = i;
-        int max = Integer.MIN_VALUE;
-        int count = 0;
-        Set<Character> strSet = new HashSet<>();
+
+        int i = 0, j = 1;
+        Map<Character,Integer> strSet = new HashMap<>();
         while (j < s.length()) {
-            if (!strSet.contains(s.charAt(j))) {
-                strSet.add(s.charAt(j));
-                count++;
+            if (!strSet.containsKey(s.charAt(j))) {
+                strSet.put(s.charAt(j),j);
                 j++;
             } else {
-                if (max < count) {
-                    max = count;
-                }
-                i++;
-                j = i;
-                count = 0;
-                strSet.clear();
+                //i直接跳到重复位置
+                i=Math.max(strSet.get(s.charAt(j)),i);
             }
 
-            if (max >= (s.length() - i)) {
-                return max;
-            }
         }
 
-        if (max < count) {
-            max = count;
-        }
 
-        return max;
+        return j-i;
     }
 }
+
+/**
+ * Java（假设字符集为 ASCII 128）
+ *
+ * 以前的我们都没有对字符串 s 所使用的字符集进行假设。
+ *
+ * 当我们知道该字符集比较小的时侯，我们可以用一个整数数组作为直接访问表来替换 Map。
+ *
+ * 常用的表如下所示：
+ *
+ * int [26] 用于字母 ‘a’ - ‘z’或 ‘A’ - ‘Z’
+ * int [128] 用于ASCII码
+ * int [256] 用于扩展ASCII码
+ *
+ * public class Solution {
+ *     public int lengthOfLongestSubstring(String s) {
+ *         int n = s.length(), ans = 0;
+ *         int[] index = new int[128]; // current index of character
+ *         // try to extend the range [i, j]
+ *         for (int j = 0, i = 0; j < n; j++) {
+ *             i = Math.max(index[s.charAt(j)], i);
+ *             ans = Math.max(ans, j - i + 1);
+ *             index[s.charAt(j)] = j + 1;
+ *         }
+ *         return ans;
+ *     }
+ * }
+ *
+ * 复杂度分析
+ *
+ * 时间复杂度：O(n)，索引j将会迭代n次。
+ *
+ * 空间复杂度（HashMap）：O(min(m, n))，与之前的方法相同。
+ *
+ * 空间复杂度（Table）：O(m)，m 是字符集的大小。
+ */
