@@ -29,68 +29,57 @@ import java.util.Set;
 public class _003LongestSubstringWithoutRepeatingCharacters {
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("dvdf"));
+        System.out.println(lengthOfLongestSubstring("tmmzuxt"));
     }
 
     public static int lengthOfLongestSubstring(String s) {
-        if (s == null || s.length() == 0) {
-            return 0;
-        }
-
-        if (s.trim().length() == 0) {
-            return 1;
-        }
-
-        int i = 0, j = 1;
-        Map<Character,Integer> strSet = new HashMap<>();
-        while (j < s.length()) {
-            if (!strSet.containsKey(s.charAt(j))) {
-                strSet.put(s.charAt(j),j);
-                j++;
-            } else {
-                //i直接跳到重复位置
-                i=Math.max(strSet.get(s.charAt(j)),i);
+        int n = s.length(), max = 0;
+        //字符-索引表
+        Map<Character, Integer> strMap = new HashMap<>();
+        //开始创建窗口[i,j]
+        for (int i = 0, j = 0; j < n; j++) {
+            //判断该字符是否已保存
+            if (strMap.containsKey(s.charAt(j))) {
+                //如果有，更新左区间的索引,即滑动窗口
+                i = Math.max(strMap.get(s.charAt(j)), i);
             }
-
+            max = Math.max(max, j - i + 1);
+            strMap.put(s.charAt(j), j + 1);
         }
-
-
-        return j-i;
+        return max;
     }
 }
 
 /**
  * Java（假设字符集为 ASCII 128）
- *
- * 以前的我们都没有对字符串 s 所使用的字符集进行假设。
- *
+ * <p>
+ * 以前的我们都没有对字符串s所使用的字符集进行假设。
  * 当我们知道该字符集比较小的时侯，我们可以用一个整数数组作为直接访问表来替换 Map。
- *
  * 常用的表如下所示：
- *
+ * <p>
  * int [26] 用于字母 ‘a’ - ‘z’或 ‘A’ - ‘Z’
  * int [128] 用于ASCII码
  * int [256] 用于扩展ASCII码
- *
+ * <p>
  * public class Solution {
- *     public int lengthOfLongestSubstring(String s) {
- *         int n = s.length(), ans = 0;
- *         int[] index = new int[128]; // current index of character
- *         // try to extend the range [i, j]
- *         for (int j = 0, i = 0; j < n; j++) {
- *             i = Math.max(index[s.charAt(j)], i);
- *             ans = Math.max(ans, j - i + 1);
- *             index[s.charAt(j)] = j + 1;
- *         }
- *         return ans;
- *     }
+ * public int lengthOfLongestSubstring(String s) {
+ * int n = s.length(), ans = 0;
+ * int[] index = new int[128]; // current index of character
+ * // try to extend the range [i, j]
+ * for (int j = 0, i = 0; j < n; j++) {
+ * i = Math.max(index[s.charAt(j)], i);
+ * ans = Math.max(ans, j - i + 1);
+ * index[s.charAt(j)] = j + 1;
  * }
- *
+ * return ans;
+ * }
+ * }
+ * <p>
  * 复杂度分析
- *
+ * <p>
  * 时间复杂度：O(n)，索引j将会迭代n次。
- *
+ * <p>
  * 空间复杂度（HashMap）：O(min(m, n))，与之前的方法相同。
- *
+ * <p>
  * 空间复杂度（Table）：O(m)，m 是字符集的大小。
  */
