@@ -8,8 +8,8 @@ package com.li.Medium;
  */
 public class _004MedianOfTwoSortedArrays {
     public static void main(String[] args) {
-        int[] nums1 = {1, 2};
-        int[] nums2 = {3, 4};
+        int[] nums1 = {3};
+        int[] nums2 = {-4, -3};
         System.out.println(findMedianSortedArrays(nums1, nums2));
     }
 
@@ -20,9 +20,9 @@ public class _004MedianOfTwoSortedArrays {
         int i = nums1.length - 1, j = nums2.length - 1, index = mLen - 1;
         int num1, num2;
         while (index >= midIndex - 1 && (i >= 0 || j >= 0)) {
-            num1 = (i >= 0) ? 0 : nums1[i];
-            num2 = (j >= 0) ? 0 : nums2[j];
-            if (num1 >= num2) {
+            num1 = (i < 0) ? Integer.MIN_VALUE : nums1[i];
+            num2 = (j < 0) ? Integer.MIN_VALUE : nums2[j];
+            if (num1 <= num2) {
                 mergeArr[index--] = nums2[j--];
             } else {
                 mergeArr[index--] = nums1[i--];
@@ -31,7 +31,7 @@ public class _004MedianOfTwoSortedArrays {
 
         double midNum;
         if (mLen % 2 == 0) {
-            midNum = (double) ((mergeArr[midIndex] + mergeArr[midIndex - 1]) / 2);
+            midNum = (double) (mergeArr[midIndex] + mergeArr[midIndex - 1]) / 2;
         } else {
             midNum = mergeArr[midIndex];
         }
