@@ -18,21 +18,17 @@ package com.li.Easy;
  */
 public class _069Sqrt_x {
     public static void main(String[] args) {
-        System.out.println("sqrt(4)=" + mySqrt(4));
+        System.out.println("sqrt(8)=" + mySqrt(4));
     }
 
     public static int mySqrt(int x) {
-        int i = x/2;
-        while (true) {
-            if ((i * i) <= x && (i + 1) * (i + 1) >= x) {
-                if ((i + 1) * (i + 1) == x) {
-                    return i + 1;
-                } else {
-                    return i;
-                }
-            }
-           // i++;
+        int x1 = 0, x2;
+        x2 = (x1 + x / x1) / 2;
+        while (Math.abs(x2 - x1) > 1) {
+            x1 = x2;
+            x2 = (x1 + x / x1) / 2;
         }
+        return x2;
     }
 
 }
