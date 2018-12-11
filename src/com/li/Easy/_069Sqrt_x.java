@@ -18,17 +18,49 @@ package com.li.Easy;
  */
 public class _069Sqrt_x {
     public static void main(String[] args) {
-        System.out.println("sqrt(8)=" + mySqrt(4));
+        int x = 2147395599;
+        System.out.println("sqrt(" + x + ")=" + mySqrt2(x));
     }
 
+    /**
+     * 牛顿迭代法
+     *
+     * @param x
+     * @return
+     */
     public static int mySqrt(int x) {
-        int x1 = 0, x2;
-        x2 = (x1 + x / x1) / 2;
-        while (Math.abs(x2 - x1) > 1) {
-            x1 = x2;
-            x2 = (x1 + x / x1) / 2;
+        if (x == 0) return 0;
+
+        long x1 = x;
+        while ((x1 * x1) > x) {
+            x1 = (x1 + x / x1) / 2;
         }
-        return x2;
+        return (int) x1;
+    }
+
+    /**
+     * 牛顿迭代法优化：二分牛顿迭代
+     */
+    public static int mySqrt2(int x) {
+        if (x == 0) return 0;
+        int left = 1, right = x;
+        int middle;
+        while (left + 1 < right) {
+            middle = (right + left) / 2;
+            if (middle > x / middle) {
+                right = middle;
+            } else if (middle < x / middle) {
+                left = middle;
+            } else {
+                return middle;
+            }
+        }
+
+        if (right < x / right) {
+            return right;
+        } else {
+            return left;
+        }
     }
 
 }
