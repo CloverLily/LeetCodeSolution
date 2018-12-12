@@ -39,7 +39,8 @@ public class _069Sqrt_x {
     }
 
     /**
-     * 牛顿迭代法优化：二分牛顿迭代
+     *优化：
+     * 二分查找法
      */
     public static int mySqrt2(int x) {
         if (x == 0) return 0;
