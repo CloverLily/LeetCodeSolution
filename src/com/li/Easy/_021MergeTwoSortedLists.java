@@ -1,5 +1,7 @@
 package com.li.Easy;
 
+import com.li.Common.ListNode;
+
 /**
  * 21. 合并两个有序链表
  * <p>
@@ -55,21 +57,6 @@ public class _021MergeTwoSortedLists {
     }
 }
 
-/**
- * 单向链表
- * Definition for singly-linked list.
- * public class ListNode {
- * int val;
- * ListNode next;
- * ListNode(int x) { val = x; }
- * }
- */
-class ListNode {
-    int val;
-    ListNode next;
 
-    ListNode(int x) {
-        val = x;
-    }
-}
+
 
