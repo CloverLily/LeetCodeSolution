@@ -72,11 +72,20 @@ public class _107BinaryTreeLevelOrderTraversal_II {
     private static void levelMaker(List<List<Integer>> list, TreeNode root, int level) {
         if (root == null) return;
         if (level >= list.size()) {
-            list.add(0, new LinkedList<Integer>());
+            list.add(0, new LinkedList<>());
         }
         levelMaker(list, root.left, level + 1);
         levelMaker(list, root.right, level + 1);
         list.get(list.size() - level - 1).add(root.val);
+    }
+
+    /**
+     * 2.DFS 深度优先遍历
+     */
+    public static List<List<Integer>> levelOrderBottom2(TreeNode root) {
+        List<List<Integer>> wrapList = new LinkedList<>();
+        levelMaker(wrapList, root, 0);
+        return wrapList;
     }
 
 }
