@@ -81,6 +81,7 @@ public class _107BinaryTreeLevelOrderTraversal_II {
 
     /**
      * 2.DFS 深度优先遍历
+     * 一直搜索到叶子节点
      */
     public static List<List<Integer>> levelOrderBottom2(TreeNode root) {
         List<List<Integer>> wrapList = new LinkedList<>();
