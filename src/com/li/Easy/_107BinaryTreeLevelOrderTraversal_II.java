@@ -4,22 +4,21 @@ import com.li.Common.TreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * 107. 二叉树的层次遍历 II
  * 给定一个二叉树，返回其节点值自底向上的层次遍历。
  * （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
- * <p>
+ *
  * 例如：
  * 给定二叉树 [3,9,20,null,null,15,7],
- * <p>
- * 3
- * / \
- * 9  20
+ *    3
+ *   / \
+ *  9  20
  * /     \
  * 15      7
  * 返回其自底向上的层次遍历为：
- * <p>
  * [
  * [15,7],
  * [9,20],
@@ -39,7 +38,8 @@ public class _107BinaryTreeLevelOrderTraversal_II {
         t1.left.left = t1LeftLeft;
         t1.right.right = t1RightRight;
 
-        List<List<Integer>> lists = levelOrderBottom(t1);
+        //List<List<Integer>> lists = levelOrderBottom(t1);
+        List<List<Integer>> lists = levelOrderBottom2(t1);
 
         for (List<Integer> list : lists) {
             System.out.print("[");
@@ -52,7 +52,6 @@ public class _107BinaryTreeLevelOrderTraversal_II {
         System.out.println();
     }
 
-
     /**
      * 1.BFS 广度优先遍历
      */
@@ -64,7 +63,6 @@ public class _107BinaryTreeLevelOrderTraversal_II {
 
     /**
      * 层序遍历二叉树
-     *
      * @param list  遍历后存放的链表
      * @param root  树的根
      * @param level 树的层数
@@ -81,12 +79,26 @@ public class _107BinaryTreeLevelOrderTraversal_II {
 
     /**
      * 2.DFS 深度优先遍历
-     * 一直搜索到叶子节点
+     * 从根结点一直搜索到叶子节点
      */
     public static List<List<Integer>> levelOrderBottom2(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
         List<List<Integer>> wrapList = new LinkedList<>();
-        levelMaker(wrapList, root, 0);
+        if (root == null) return wrapList;
+        //offer()：如果在不违反容量限制的情况下立即执行，则将指定的元素插入到此队列中。
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int levelNum = queue.size();
+            List<Integer> subList = new LinkedList<>();
+            for (int i = 0; i < levelNum; i++) {
+                //peek():检索但不删除此队列的头，如果此队列为空，则返回 null 。
+                if (queue.peek().left != null) queue.offer(queue.peek().left);
+                if (queue.peek().right != null) queue.offer(queue.peek().right);
+                //poll():检索并删除此队列的头，如果此队列为空，则返回 null 。
+                subList.add(queue.poll().val);
+            }
+            wrapList.add(0, subList);
+        }
         return wrapList;
     }
-
 }
