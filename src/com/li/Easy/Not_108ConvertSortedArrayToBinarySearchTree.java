@@ -20,7 +20,7 @@ import com.li.Common.TreeNode;
  *    /   /
  *  -10  5
  */
-public class _108ConvertSortedArrayToBinarySearchTree {
+public class Not_108ConvertSortedArrayToBinarySearchTree {
     public TreeNode sortedArrayToBST(int[] nums) {
 
         return new TreeNode(0);
