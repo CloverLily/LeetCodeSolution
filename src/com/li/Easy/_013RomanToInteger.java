@@ -25,7 +25,7 @@ package com.li.Easy;
  * char[] romans={'I','V','X','L','C','D','M'};
  * int[] romanValues={1,5,10,50,100,500,1000};
  */
-class _013RomanToInteger {
+public class _013RomanToInteger {
     public static int romanToInt(String s) {
         //罗马数的十进制表示
         int sum = 0;
