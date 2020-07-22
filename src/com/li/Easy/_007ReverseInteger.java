@@ -1,8 +1,5 @@
 package com.li.Easy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 7 反转整数
  * 给定一个32位有符号整数，将整数中的数字进行反转。
