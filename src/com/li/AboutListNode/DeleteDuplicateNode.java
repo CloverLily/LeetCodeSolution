@@ -9,6 +9,7 @@ import com.li.Common.ListNode;
  * 1->2->2->4->4->5
  * output:
  * 1->5
+ * @author system
  */
 public class DeleteDuplicateNode {
 
