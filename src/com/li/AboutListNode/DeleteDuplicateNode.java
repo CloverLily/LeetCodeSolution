@@ -41,6 +41,13 @@ public class DeleteDuplicateNode {
         }
     }
 
+    /**
+     * 删除重复节点
+     * 返回1->5
+     *
+     * @param head 链表
+     * @return 去掉重复的节点后结果
+     */
     private static ListNode deleteDuplicateNode(ListNode head) {
         if (head == null) {
             return null;
@@ -72,32 +79,23 @@ public class DeleteDuplicateNode {
 
     /**
      * 删除重复节点
+     * 返回1->2->4->5
+     *
      * @param head 链表
      * @return 去掉重复的节点后结果
      */
     private static ListNode deleteDuplicateNode2(ListNode head) {
-        if (Objects.isNull(head)) {
-            return null;
-        }
-
-        if (Objects.isNull(head.next)) {
+        if (Objects.isNull(head) || Objects.isNull(head.next)) {
             return head;
         }
 
         ListNode newHead = new ListNode(-1);
         newHead.next = head;
-        ListNode pre = newHead;
 
-        while (Objects.nonNull(head) && Objects.nonNull(head.next)) {
+        while (Objects.nonNull(head.next)) {
             if (head.val == head.next.val) {
-                int val = head.val;
-                head = head.next.next;
-                while (Objects.nonNull(head) && head.val == val) {
-                    head = head.next;
-                }
-                pre.next = head;
+                head.next = head.next.next;
             } else {
-                pre = head;
                 head = head.next;
             }
         }
