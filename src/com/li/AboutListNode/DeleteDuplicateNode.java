@@ -2,6 +2,8 @@ package com.li.AboutListNode;
 
 import com.li.Common.ListNode;
 
+import java.util.Objects;
+
 /**
  * 删除链表的重复节点
  * e.g
@@ -9,6 +11,7 @@ import com.li.Common.ListNode;
  * 1->2->2->4->4->5
  * output:
  * 1->5
+ *
  * @author system
  */
 public class DeleteDuplicateNode {
@@ -27,12 +30,12 @@ public class DeleteDuplicateNode {
         node3.next = node4;
         node4.next = node5;
 
-        ListNode node = deleteDuplicateNode(head);
+        ListNode node = deleteDuplicateNode2(head);
 
         while (node != null) {
             System.out.print(node.val);
             node = node.next;
-            if(node != null){
+            if (node != null) {
                 System.out.print("->");
             }
         }
@@ -56,6 +59,40 @@ public class DeleteDuplicateNode {
                 int value = head.val;
                 head = head.next.next;
                 while (head != null && head.val == value) {
+                    head = head.next;
+                }
+                pre.next = head;
+            } else {
+                pre = head;
+                head = head.next;
+            }
+        }
+        return newHead.next;
+    }
+
+    /**
+     * 删除重复节点
+     * @param head 链表
+     * @return 去掉重复的节点后结果
+     */
+    private static ListNode deleteDuplicateNode2(ListNode head) {
+        if (Objects.isNull(head)) {
+            return null;
+        }
+
+        if (Objects.isNull(head.next)) {
+            return head;
+        }
+
+        ListNode newHead = new ListNode(-1);
+        newHead.next = head;
+        ListNode pre = newHead;
+
+        while (Objects.nonNull(head) && Objects.nonNull(head.next)) {
+            if (head.val == head.next.val) {
+                int val = head.val;
+                head = head.next.next;
+                while (Objects.nonNull(head) && head.val == val) {
                     head = head.next;
                 }
                 pre.next = head;
