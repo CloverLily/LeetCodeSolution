@@ -1,0 +1,28 @@
+package com.li.common;
+
+/**
+ * 单向链表
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode(int x) { val = x; }
+ * }
+ *
+ * @author system
+ */
+public class ListNode {
+
+    /**
+     * 节点值
+     */
+    public int val;
+    /**
+     * 下一个节点
+     */
+    public ListNode next;
+
+    public ListNode(int val) {
+        this.val = val;
+    }
+}
