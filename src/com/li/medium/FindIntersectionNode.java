@@ -1,7 +1,10 @@
-package com.li.Medium;
+package com.li.medium;
+
+import com.li.common.ListNode;
 
 /**
  * 寻找交叉链表的交叉节点
+ * @author system
  */
 public class FindIntersectionNode {
         public static void main(String[] args) {

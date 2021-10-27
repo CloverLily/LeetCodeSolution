@@ -4,8 +4,10 @@ import java.util.Stack;
 
 /**
  * 用两个栈实现队列
+ *
+ * @author system
  */
-public class _232ImplementQueueUsingStacks {
+public class ImplementQueueUsingStacks232 {
 
     /**
      * Your MyQueue object will be instantiated and called as such:
