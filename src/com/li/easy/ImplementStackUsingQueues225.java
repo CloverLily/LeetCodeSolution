@@ -5,8 +5,11 @@ import java.util.Queue;
 
 /**
  * 两个队列实现栈
+ *
+ * @author system
+ *
  */
-public class _225ImplementStackUsingQueues {
+public class ImplementStackUsingQueues225 {
 
     /**
      * Your MyStack object will be instantiated and called as such:

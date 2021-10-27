@@ -6,35 +6,37 @@ import com.li.common.TreeNode;
  * 100. 相同的树
  * 给定两个二叉树，编写一个函数来检验它们是否相同。
  * 如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。
- * <p>
+ * 
  * 示例 1:
  * 输入:       1         1
  * / \       / \
  * 2   3     2   3
- * <p>
+ * 
  * [1,2,3],   [1,2,3]
- * <p>
+ * 
  * 输出: true
- * <p>
+ * 
  * 示例 2:
  * 输入:      1          1
  * /           \
  * 2             2
- * <p>
+ * 
  * [1,2],     [1,null,2]
- * <p>
+ * 
  * 输出: false
- * <p>
+ * 
  * 示例 3:
  * 输入:       1         1
  * / \       / \
  * 2   1     1   2
- * <p>
+ * 
  * [1,2,1],   [1,1,2]
- * <p>
+ * 
  * 输出: false
+ *
+ * @author system
  */
-public class _100SameTree {
+public class SameTree100 {
     public static void main(String[] args) {
         TreeNode t1 = new TreeNode(1);
         TreeNode t1left = new TreeNode(2);

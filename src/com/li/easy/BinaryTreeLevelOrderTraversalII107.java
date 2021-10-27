@@ -24,8 +24,10 @@ import java.util.Queue;
  * [9,20],
  * [3]
  * ]
+ *
+ * @author system
  */
-public class _107BinaryTreeLevelOrderTraversal_II {
+public class BinaryTreeLevelOrderTraversalII107 {
 
     public static void main(String[] args) {
         TreeNode t1 = new TreeNode(3);

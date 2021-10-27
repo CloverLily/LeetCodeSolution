@@ -25,8 +25,10 @@ import java.util.Queue;
  *    3    3
  * 说明:
  * 如果你可以运用递归和迭代两种方法解决这个问题，会很加分。
+ *
+ * @author system
  */
-public class _101SymmetricTree {
+public class SymmetricTree101 {
     public static void main(String[] args) {
         TreeNode t1 = new TreeNode(1);
         TreeNode t1left = new TreeNode(2);
