@@ -25,7 +25,12 @@ package com.li.easy;
  */
 public class BestTimeToBuyAndSellStock121 {
 
-    public int maxProfit(int[] prices) {
+    public static void main(String[] args) {
+        int[] prices = {7,6,3,4,1};
+        System.out.println(maxProfit(prices));
+    }
+
+    private static int maxProfit(int[] prices) {
         if (prices.length == 0) {
             return 0;
         }
