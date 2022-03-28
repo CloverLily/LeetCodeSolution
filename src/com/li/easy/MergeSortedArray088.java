@@ -6,12 +6,12 @@ package com.li.easy;
  * 说明:
  * 初始化 nums1 和 nums2 的元素数量分别为 m 和 n。
  * 你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。
- * 
+ *
  * 示例:
  * 输入:
  * nums1 = [1,2,3,0,0,0], m = 3
  * nums2 = [2,5,6],       n = 3
- * 
+ *
  * 输出: [1,2,2,3,5,6]
  *
  * @author system
@@ -23,11 +23,70 @@ public class MergeSortedArray088 {
         int[] nums2 = {3};
         merge(nums1, 5, nums2, nums2.length);
         //merge2(nums1, 5, nums2, nums2.length);
+        merge3(nums1, 5, nums2, nums2.length);
+
+        //测试 m=0, n=1
+        int[] nums11 = {0};
+        int[] nums22 = {1};
+        merge3(nums11, 0, nums22, 1);
 
         for (int i : nums1) {
             System.out.print(i + ",");
         }
     }
+
+    /**
+     * 普通方法
+     * 1.把nums1移到数组右侧
+     * 2.对比
+     *
+     */
+    public static void merge3(int[] nums1, int m, int[] nums2, int n) {
+        if (m == 0) {
+            for (int i = 0; i < n; i++) {
+                nums1[i] = nums2[i];
+            }
+            return;
+        }
+        if (n == 0) {
+            return;
+        }
+
+        //把所有nums1元素移到右侧
+        for (int i = m - 1; i >= 0; i--) {
+            nums1[i + n] = nums1[i];
+        }
+
+        int k = 0;
+        int i = nums1.length - m;
+        int j = 0;
+        while (k < nums1.length) {
+            if (j >= n) {
+                nums1[k] = nums1[i];
+                i++;
+                k++;
+                continue;
+            }
+
+            if (i >= nums1.length) {
+                nums1[k] = nums2[j];
+                j++;
+                k++;
+                continue;
+            }
+
+            if (nums1[i] >= nums2[j]) {
+                nums1[k] = nums2[j];
+                j++;
+            } else {
+                nums1[k] = nums1[i];
+                i++;
+            }
+            k++;
+        }
+
+    }
+
 
     /**
      * 2.反向排序，从右向左，先排大数
