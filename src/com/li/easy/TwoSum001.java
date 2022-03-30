@@ -13,6 +13,11 @@ public class TwoSum001 {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> indexMap = new HashMap<>(16);
 
+        //边界判断
+        if(nums == null || nums.length == 0){
+            return new int[0];
+        }
+
         for (int i = 0; i < nums.length; i++) {
             int complement = target - nums[i];
             if (indexMap.containsKey(complement)) {
