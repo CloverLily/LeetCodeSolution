@@ -4,6 +4,7 @@ import com.li.common.TreeNode;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 
 /**
@@ -65,12 +66,15 @@ public class BinaryTreeLevelOrderTraversalII107 {
 
     /**
      * 层序遍历二叉树
+     *
      * @param list  遍历后存放的链表
      * @param root  树的根
      * @param level 树的层数
      */
     private static void levelMaker(List<List<Integer>> list, TreeNode root, int level) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
         if (level >= list.size()) {
             list.add(0, new LinkedList<>());
         }
@@ -86,7 +90,9 @@ public class BinaryTreeLevelOrderTraversalII107 {
     public static List<List<Integer>> levelOrderBottom2(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         List<List<Integer>> wrapList = new LinkedList<>();
-        if (root == null) return wrapList;
+        if (root == null) {
+            return wrapList;
+        }
         //offer()：如果在不违反容量限制的情况下立即执行，则将指定的元素插入到此队列中。
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -94,10 +100,20 @@ public class BinaryTreeLevelOrderTraversalII107 {
             List<Integer> subList = new LinkedList<>();
             for (int i = 0; i < levelNum; i++) {
                 //peek():检索但不删除此队列的头，如果此队列为空，则返回 null 。
-                if (queue.peek().left != null) queue.offer(queue.peek().left);
-                if (queue.peek().right != null) queue.offer(queue.peek().right);
+                TreeNode element = queue.peek();
+                if (Objects.nonNull(element) && element.left != null) {
+                    queue.offer(element.left);
+                }
+                if (Objects.nonNull(element) && element.right != null) {
+                    queue.offer(element.right);
+                }
+
                 //poll():检索并删除此队列的头，如果此队列为空，则返回 null 。
-                subList.add(queue.poll().val);
+                TreeNode head = queue.poll();
+                if (Objects.nonNull(head)) {
+                    subList.add(head.val);
+                }
+
             }
             wrapList.add(0, subList);
         }
