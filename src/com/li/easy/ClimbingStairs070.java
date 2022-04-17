@@ -32,12 +32,17 @@ public class ClimbingStairs070 {
     /**
      * 递归法求阶梯问题
      *
-     * @param n
-     * @return
+     * @param n 阶梯数
+     * @return 爬上阶梯的方法数
      */
     public static int climbStairs(int n) {
-        if (n == 1) return 1;
-        if (n == 2) return 2;
+        if (n == 1) {
+            return 1;
+        }
+
+        if (n == 2) {
+            return 2;
+        }
 
         int[] stairsBP = new int[n];
         stairsBP[0] = 1;
@@ -48,8 +53,12 @@ public class ClimbingStairs070 {
 
     private static int climbStairs(int n, int[] stairsBP) {
         if (stairsBP[n - 1] == 0) {
-            if (stairsBP[n - 2] == 0) stairsBP[n - 2] = climbStairs(n - 1, stairsBP);
-            if (stairsBP[n - 3] == 0) stairsBP[n - 3] = climbStairs(n - 2, stairsBP);
+            if (stairsBP[n - 2] == 0) {
+                stairsBP[n - 2] = climbStairs(n - 1, stairsBP);
+            }
+            if (stairsBP[n - 3] == 0) {
+                stairsBP[n - 3] = climbStairs(n - 2, stairsBP);
+            }
             stairsBP[n - 1] = stairsBP[n - 2] + stairsBP[n - 3];
         }
         return stairsBP[n - 1];
@@ -60,8 +69,12 @@ public class ClimbingStairs070 {
      * 非递归法求阶梯问题
      */
     public static int climbStairs2(int n) {
-        if (n == 1) return 1;
-        if (n == 2) return 2;
+        if (n == 1) {
+            return 1;
+        }
+        if (n == 2) {
+            return 2;
+        }
 
         int[] stairsBP = new int[n];
         stairsBP[0] = 1;
