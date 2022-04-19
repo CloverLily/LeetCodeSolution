@@ -1,7 +1,10 @@
 package com.li.medium;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 73. 矩阵置零 TODO
+ * 73. 矩阵置零
  *
  * 给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。
  *
@@ -34,9 +37,27 @@ public class SetMatrixZeroes073 {
         int[][] matrix0 = {{1, 0}};
         int[][] matrix = {{0, 2, 3}, {4, 0, 6}};
         int[][] matrix2 = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
-        setZeroes(matrix0);
+        int[][] matrix3 = {
+                {1, 2, 3, 4},
+                {5, 0, 7, 8},
+                {0,10,11,12},
+                {13,14,15,0}};
+        int[][] matrix4 = {
+                {0,1,2,0},
+                {3,4,5,2},
+                {1,3,1,5}
+        };
 
-        for (int[] row : matrix0) {
+        int[][] matrix5 = {
+                {-4,-2147483648, 6,-7,  0},
+                {-8,          6,-8,-6,  0},
+                {2147483647,  2,-9,-6,-10}};
+
+//        setZeroes0(matrix2);
+//        setZeroes1(matrix4);
+        setZeroes2(matrix5);
+
+        for (int[] row : matrix5) {
             for (int num : row) {
                 System.out.print(num);
                 System.out.print(",");
@@ -46,64 +67,171 @@ public class SetMatrixZeroes073 {
 
     }
 
-    public static void setZeroes(int[][] matrix) {
+    /**
+     * O(1)额外空间
+     * 第一列左上角用于标记行是否为0, 第二列用于标记列是否为0
+     *
+     * @param matrix 待置零数组
+     */
+    public static void setZeroes2(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
 
+        boolean column0Flag = false;
         for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+            if(matrix[i][0] == 0){
+                column0Flag =true;
+            }
+            for (int j = 1; j < n; j++) {
                 if (matrix[i][j] == 0) {
-                    setZeroes(matrix, i, j);
+                    matrix[i][0] = matrix[0][j] = 0;
                 }
             }
         }
 
-//        int i = 0;
-//        int j = 0;
-//        while (i < m && j < n) {
-//            if (matrix[i][j] == 0) {
-//                setZeroes(matrix, i, j);
-//            }
-//
-//            i++;
-//            j++;
-//        }
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[0][j] == 0 || matrix[i][0] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+            if(column0Flag){
+                matrix[i][0] = 0;
+            }
+        }
+    }
+
+    /**
+     * O(m + n)额外空间
+     *
+     * @param matrix 待置零数组
+     */
+    public static void setZeroes1(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        boolean row0Flag = false;
+        boolean column0Flag = false;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (matrix[i][j] == 0) {
+
+                    if (i == 0) {
+                        column0Flag = true;
+                    }
+
+                    if (j == 0) {
+                        row0Flag = true;
+                    }
+
+                    matrix[i][0] = matrix[0][j] = 0;
+                }
+            }
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+
+        if (row0Flag) {
+            for (int i = 0; i < m; i++) {
+                matrix[i][0] = 0;
+            }
+        }
+
+        if (column0Flag) {
+            for (int j = 0; j < n; j++) {
+                matrix[0][j] = 0;
+            }
+        }
+
+    }
+
+    /**
+     * O(m*n)额外空间
+     * 遍历记录零的位置+遍历置零
+     * @param matrix 待置零数组
+     */
+    public static void setZeroes0(int[][] matrix) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        List<Point> zeroPointList = new ArrayList<>(m*n);
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    zeroPointList.add(new Point(i, j));
+                }
+            }
+        }
+
+        if(zeroPointList.isEmpty()){
+            return;
+        }
+
+        for(Point point: zeroPointList){
+            setPointZeroes(matrix, point);
+        }
 
     }
 
     /**
      * 某个位置为零时行列置零
      * @param matrix 数组
-     * @param rowIndex 为0的行索引
-     * @param colIndex 为0的列索引
+     * @param point 0的二维索引位置
      */
-    private static void setZeroes(int[][] matrix, int rowIndex, int colIndex) {
-        if (matrix == null) {
+    private static void setPointZeroes(int[][] matrix, Point point) {
+        if (matrix == null || point == null) {
             return;
         }
 
+        //数组行数
         int m = matrix.length;
+        //数组列数
         int n = matrix[0].length;
 
-        if (rowIndex >= m || colIndex >= n) {
+        if (point.getRowIndex() >= m || point.getColumnIndex() >= n) {
             return;
         }
 
-        for (int k = 0; k < m; k++) {
-            if (matrix[k][colIndex] != 0) {
-                matrix[k][colIndex] = 0;
-            } else if (k > rowIndex) {
-                setZeroes(matrix, k, colIndex);
-            }
+        for (int i = 0; i < m; i++) {
+            matrix[i][point.getColumnIndex()] = 0;
         }
 
-        for (int q = 0; q < n; q++) {
-            if (matrix[rowIndex][q] != 0) {
-                matrix[rowIndex][q] = 0;
-            } else if (q > colIndex) {
-                setZeroes(matrix, rowIndex, q);
-            }
+        for (int j = 0; j < n; j++) {
+            matrix[point.getRowIndex()][j] = 0;
         }
+
+    }
+
+    private static class Point {
+        /**
+         * 二维横坐标
+         */
+        int rowIndex;
+        /**
+         * 二维纵坐标
+         */
+        int columnIndex;
+
+        public Point(int rowIndex, int columnIndex){
+            this.rowIndex = rowIndex;
+            this.columnIndex = columnIndex;
+        }
+
+        private int getRowIndex(){
+            return this.rowIndex;
+        }
+
+        private int getColumnIndex(){
+            return this.columnIndex;
+        }
+
 
     }
 
