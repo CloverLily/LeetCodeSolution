@@ -29,12 +29,56 @@ public class MergeTwoSortedLists021 {
         a2.next = b2;
         b2.next = c2;
 
-        ListNode result = mergeTwoLists(a1, a2);
+//        ListNode result = mergeTwoLists(a1, a2);
+        ListNode result = mergeTwoLists0428(a1, a2);
         while (result != null) {
             System.out.print(result.val + ",");
             result = result.next;
         }
 
+    }
+
+    /**
+     * 普通遍历
+     * @param list1 链表1
+     * @param list2 链表2
+     * @return 合并后的有序链表
+     */
+    public static ListNode mergeTwoLists0428(ListNode list1, ListNode list2) {
+        if (list1 == null) {
+            return list2;
+        }
+
+        if (list2 == null) {
+            return list1;
+        }
+
+        ListNode resList = new ListNode(0);
+        ListNode resBody = resList;
+
+        while (list1 != null && list2 != null) {
+
+            if (list1.val > list2.val) {
+                resBody.next = list2;
+                list2 = list2.next;
+
+            } else {
+                resBody.next = list1;
+                list1 = list1.next;
+            }
+
+            resBody = resBody.next;
+        }
+
+        if (list1 != null) {
+            resBody.next = list1;
+        }
+
+        if (list2 != null) {
+            resBody.next = list2;
+        }
+
+        return resList.next;
     }
 
     /**
