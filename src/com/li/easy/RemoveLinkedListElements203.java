@@ -23,6 +23,8 @@ import com.li.common.ListNode;
  *     列表中的节点数目在范围 [0, 104] 内
  *     1 <= Node.val <= 50
  *     0 <= val <= 50
+ *
+ * @author kang
  */
 public class RemoveLinkedListElements203 {
 
@@ -75,7 +77,6 @@ public class RemoveLinkedListElements203 {
         }
 
     }
-
 
     public static ListNode removeElements(ListNode head, int val) {
 
