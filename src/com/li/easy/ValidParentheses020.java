@@ -1,6 +1,6 @@
 package com.li.easy;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 20. 有效的括号
@@ -63,7 +63,7 @@ public class ValidParentheses020 {
         }
 
         char[] sChars = s.toCharArray();
-        Stack<Character> sStack = new Stack<>();
+        Deque<Character> sStack = new LinkedList<>() ;
 
         for (char sChar : sChars) {
 
