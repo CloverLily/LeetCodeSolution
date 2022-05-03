@@ -34,11 +34,11 @@ public class RemoveDuplicatesFromSortedList083 {
         a2.next = a3;
         a3.next = a4;
         a4.next = a5;
-        l1 = deleteDuplicates0503(l1);
-        while (l1 != null) {
+        ListNode res1 = deleteDuplicates0503(l1);
+        while (res1 != null) {
             //1->2->3
-            System.out.print(l1.val);
-            l1 = l1.next;
+            System.out.print(res1.val);
+            res1 = res1.next;
         }
         System.out.println();
 
@@ -48,10 +48,10 @@ public class RemoveDuplicatesFromSortedList083 {
         ListNode b3 = new ListNode(1);
         l2.next = b2;
         b2.next = b3;
-        l2 = deleteDuplicates0503(l2);
-        while (l2 != null) {
-            System.out.print(l2.val);
-            l2 = l2.next;
+        ListNode res2 = deleteDuplicates0503(l2);
+        while (res2 != null) {
+            System.out.print(res2.val);
+            res2 = res2.next;
         }
 
     }
