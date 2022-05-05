@@ -33,6 +33,31 @@ public class BinaryTreeInorderTraversal094 {
 
     public static void main(String[] args) {
 
+        TreeNode root1 = new TreeNode(1);
+        TreeNode left1 = new TreeNode(2);
+        TreeNode right1 = new TreeNode(3);
+        TreeNode left1left = new TreeNode(4);
+        TreeNode left1right = new TreeNode(5);
+        TreeNode right1left = new TreeNode(6);
+        TreeNode right1right = new TreeNode(7);
+        TreeNode right1rightleft = new TreeNode(8);
+        TreeNode right1rightright = new TreeNode(9);
+        root1.left = left1;
+        root1.right = right1;
+        left1.left = left1left;
+        left1.right = left1right;
+        right1.left = right1left;
+        right1.right = right1right;
+        right1right.left = right1rightleft;
+        right1right.right = right1rightright;
+
+        List<Integer> res1 = inorderTraversalByRecursion(root1);
+//        List<Integer> res1 = inorderTraversalByIterate(root1);
+        for (Integer node : res1) {
+            System.out.print(node + ",");
+        }
+
+        inorderTraversalByIterate(null);
     }
 
     /**
@@ -40,7 +65,7 @@ public class BinaryTreeInorderTraversal094 {
      * @param root 根节点
      * @return 前序遍历结果
      */
-    public List<Integer> inorderTraversalByRecursion(TreeNode root) {
+    public static List<Integer> inorderTraversalByRecursion(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         traversalByRecursion(root, res);
         return res;
@@ -51,7 +76,7 @@ public class BinaryTreeInorderTraversal094 {
      * @param root 根节点
      * @param res 前序遍历结果
      */
-    private void traversalByRecursion(TreeNode root, List<Integer> res){
+    private static void traversalByRecursion(TreeNode root, List<Integer> res){
         if(root == null){
             return;
         }
@@ -66,7 +91,7 @@ public class BinaryTreeInorderTraversal094 {
      * @param root 根节点
      * @return 迭代法中序遍历
      */
-    public List<Integer> inorderTraversalByIterate(TreeNode root) {
+    public static List<Integer> inorderTraversalByIterate(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         if(Objects.isNull(root)){
             return res;
