@@ -57,7 +57,8 @@ public class BinaryTreeInorderTraversal094 {
             System.out.print(node + ",");
         }
 
-        inorderTraversalByIterate(null);
+        List<Integer> res2 = inorderTraversalByIterate(null);
+        System.out.println(res2);
     }
 
     /**
@@ -98,15 +99,14 @@ public class BinaryTreeInorderTraversal094 {
         }
 
         Deque<TreeNode> stack = new LinkedList<>();
-        TreeNode localNode = root;
-        while(localNode != null || !stack.isEmpty()){
-            while(localNode != null){
-                stack.push(localNode);
-                localNode = localNode.left;
+        while(root != null || !stack.isEmpty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
             }
-            localNode = stack.pop();
-            res.add(localNode.val);
-            localNode = localNode.right;
+            root = stack.pop();
+            res.add(root.val);
+            root = root.right;
         }
 
         return res;
