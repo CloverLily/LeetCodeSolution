@@ -19,7 +19,7 @@ package com.li.medium;
  * 输入: nums = [2,3,0,1,4]
  * 输出: 2
  * 提示:
- * <p>
+ *
  * 1 <= nums.length <= 10^4
  * 0 <= nums[i] <= 1000
  * 题目保证可以到达 nums[n-1]
