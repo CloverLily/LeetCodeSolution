@@ -19,7 +19,7 @@ package com.li.medium;
  * 1 <= nums.length <= 10^4
  * 0 <= nums[i] <= 10^5
  */
-public class JumpGame55 {
+public class JumpGame055 {
 
     public static void main(String[] args) {
         int[] nums = {2,3,1,1,4};//true
