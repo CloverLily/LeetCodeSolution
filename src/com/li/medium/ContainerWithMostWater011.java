@@ -23,7 +23,7 @@ package com.li.medium;
  * 2 <= n <= 10^5
  * 0 <= height[i] <= 10^4
  */
-public class ContainerWithMostWater {
+public class ContainerWithMostWater011 {
 
     public static void main(String[] args) {
         int[][] heights = {
