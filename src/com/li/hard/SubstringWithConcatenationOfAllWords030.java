@@ -123,4 +123,40 @@ public class SubstringWithConcatenationOfAllWords030 {
         }
         return resList;
     }
+
+    /*
+     * 滑动窗口示意图：同一类的窗口放在同一批i的遍历中，方便每次一个单词的步数，剔除左侧滑走的单词，同时加上右侧滑入的单词，这样可以节省了中间重叠的单词的匹配。
+     * s								barfoofoobarthefoobarman
+     * words								"bar", "foo", "the"
+     *
+     * index					0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15	16	17	18	19	20	21	22	23
+     * s[index]					b	a	r	f	o	o	f	o	o	b	a	r	t	h	e	f	o	o	b	a	r	m	a	n
+     *
+     * i=0
+     * 滑动窗口start = 0			b	a	r	f	o	o	f	o	o
+     *
+     * 滑动窗口start = 3						f	o	o	f	o	o	b	a	r
+     *
+     * 滑动窗口start = 6									f	o	o	b	a	r	t	h	e
+     *
+     * 滑动窗口start = 9												b	a	r	t	h	e	f	o	o
+     *
+     * 滑动窗口start = 15														t	h	e	f	o	o	b	a	r
+     *
+     * 滑动窗口start = 15																	f	o	o	b	a	r	m	a	n
+     *
+     * i=1
+     * 滑动窗口start =1				a	r	f	o	o	f	o	o	b
+     *
+     * 滑动窗口start = 4							o	o	f	o	o	b	a	r	t
+     *
+     * 滑动窗口start = 7										o	o	b	a	r	t	h	e	f
+     *
+     * 滑动窗口start = 10												a	r	t	h	e	f	o	o	b
+
+     * 滑动窗口start = 13															h	e	f	o	o	b	a	r	m
+     *
+     * ...
+     *
+     */
 }
