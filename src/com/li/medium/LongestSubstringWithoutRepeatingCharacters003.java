@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 3. 无重复字符的最长子串
- * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+ * 给定一个字符串，请你找出其中不含有重复字符的 最长子串（子字符串 是字符串中连续的 非空 字符序列。） 的长度。
  * 
  * 示例 1:
  * 输入: "abcabcbb"
@@ -21,16 +21,53 @@ import java.util.Map;
  * 输入: "pwwkew"
  * 输出: 3
  * 解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
- * 
  * 请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+ *
+ * 提示：
+ * 0 <= s.length <= 5 * 10^4
+ * s 由英文字母、数字、符号和空格组成
  *
  * @author system
  */
 public class LongestSubstringWithoutRepeatingCharacters003 {
 
     public static void main(String[] args) {
-        System.out.println("pwke中最大的不重复子字符串共有:"+lengthOfLongestSubstring("pwke")+"个字符");
-        System.out.println("abcabcbb中最大的不重复子字符串共有:"+lengthOfLongestSubstring2("abcabcbb")+"个字符");
+        String[] s = {
+                "au",//2
+                "abcabcbb",//3
+                "bbbbb",//1
+                "pwwkew"//3
+        };
+        for (String str : s) {
+            System.out.println(lengthOfLongestSubstring20241106(str));
+//            System.out.println(lengthOfLongestSubstring(str));
+        }
+    }
+
+    /**
+     * 滑动窗口，
+     * time:O(N),space:O(N)
+     */
+    public static int lengthOfLongestSubstring20241106(String s) {
+        int n = s.length();
+        if (n <= 1) {
+            return n;
+        }
+        int i = 0;
+        int j = 0;
+        int maxCnt = 0;
+        Map<Character, Integer> strIndexMap = new HashMap<>();
+        while (i <= j && j < n) {
+            Integer repeatJ = strIndexMap.get(s.charAt(j));
+            if (repeatJ != null && repeatJ >= i) {
+                maxCnt = Math.max(maxCnt, j - i);
+                i = strIndexMap.get(s.charAt(j)) + 1;
+            }
+            strIndexMap.put(s.charAt(j), j);
+            j++;
+        }
+        maxCnt = Math.max(maxCnt, j - i);
+        return maxCnt;
     }
 
     /**
