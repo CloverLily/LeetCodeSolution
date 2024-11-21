@@ -66,8 +66,8 @@ public class ReverseLinkedListIi092 {
     }
 
     /**
-     * 自解：一次遍历
-     * time:O(N), space:O(1)
+     * 自解：一次遍历 + 额外空间
+     * time:O(N), space:O(N)
      */
     public static ListNode reverseBetween(ListNode head, int left, int right) {
         ListNode newHead = new ListNode(-1);
