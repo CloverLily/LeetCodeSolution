@@ -36,7 +36,7 @@ import java.util.*;
  * 最多调用 insert、remove 和 getRandom 函数 2 * 10^5 次
  * 在调用 getRandom 方法时，数据结构中 至少存在一个 元素。
  */
-public class InsertDeleteGetRandomO1380 {
+public class InsertDeleteGetRandomO1_380 {
     public static void main(String[] args) {
         RandomizedSet randomizedSet = new RandomizedSet();
         System.out.println( randomizedSet.insert(1)); // 向集合中插入 1 。返回 true 表示 1 被成功地插入。

@@ -11,7 +11,7 @@ import java.util.Set;
  * 如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。
  * 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。
  * 注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。
- * 如果链表中存在环 ，则返回 true 。 否则，返回 false 。
+ * 如果链表中存在环 ，则返回 true 。 否则，返回 false。
  *
  * 示例 1：
  * 输入：head = [3,2,0,-4], pos = 1
@@ -29,18 +29,28 @@ import java.util.Set;
  * 解释：链表中没有环。
  *
  * 提示：
- *     链表中节点的数目范围是 [0, 10^4]
- *     -10^5 <= Node.val <= 10^5
- *     pos 为 -1 或者链表中的一个 有效索引 。
+ * 链表中节点的数目范围是 [0, 10^4]
+ * -10^5 <= Node.val <= 10^5
+ * pos 为 -1 或者链表中的一个 有效索引 。
  *
  * 进阶：你能用 O(1)（即，常量）内存解决此问题吗？
  *
- * @author kang
+ * @author system
  */
 public class LinkedListCycle141 {
 
+    /**
+     * Definition for singly-linked list.
+     * class ListNode {
+     *     int val;
+     *     ListNode next;
+     *     ListNode(int x) {
+     *         val = x;
+     *         next = null;
+     *     }
+     * }
+     */
     public static void main(String[] args) {
-
         //head = [3,2,0,-4], pos = 1
         ListNode headA = new ListNode(3);
         ListNode headA2 = new ListNode(2);
@@ -60,37 +70,39 @@ public class LinkedListCycle141 {
         //head = [1], pos = -1
         ListNode headC = new ListNode(1);
 
-        System.out.println(hasCycle3(headA));
-        System.out.println(hasCycle3(headB));
-        System.out.println(hasCycle3(headC));
+        ListNode headD = new ListNode(1);
+        ListNode headD2 = new ListNode(2);
+        headD.next = headD2;
+
+        ListNode[] heads = {
+                headA,//true
+                headB,//true
+                headC,//false
+                headD//false
+        };
+        for (ListNode ln : heads) {
+            System.out.println(hasCycle(ln));
+        }
     }
 
     /**
-     * Floyd Algorithm
-     * while
-     * 时间 O(N)
-     * 空间 O(1)
-     * @param head 链表头
-     * @return 是否环形链表
+     * 官方：快慢指针
+     * time:O(N), space: O(1)
      */
-    public static boolean hasCycle3(ListNode head) {
-
-        if (head == null || head.next == null) {
+    public static boolean hasCycle(ListNode head) {
+        if (head == null) {
             return false;
         }
 
-        ListNode fast = head.next;
         ListNode slow = head;
-
-        while(slow != fast){
-            if(fast == null || fast.next == null){
+        ListNode fast = head.next;
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
                 return false;
             }
-
-           fast = fast.next.next;
-           slow = slow.next;
+            slow = slow.next;
+            fast = fast.next.next;
         }
-
         return true;
     }
 
@@ -103,7 +115,6 @@ public class LinkedListCycle141 {
      * @return 是否环形链表
      */
     public static boolean hasCycle2(ListNode head) {
-
         if (head == null) {
             return false;
         }
@@ -112,7 +123,6 @@ public class LinkedListCycle141 {
         ListNode slow = head;
 
         do {
-
             if(fast.next == null){
                 return false;
             }
@@ -138,22 +148,19 @@ public class LinkedListCycle141 {
      * @param head 链表头
      * @return 是否环形链表
      */
-    public static boolean hasCycle(ListNode head) {
-
+    public static boolean hasCycleOfficial(ListNode head) {
         if (head == null) {
             return false;
         }
 
         Set<ListNode> indexSet = new HashSet<>();
         ListNode now = head;
-        while(now != null){
-            if(!indexSet.add(now)){
+        while (now != null) {
+            if (!indexSet.add(now)) {
                 return true;
             }
-
             now = now.next;
         }
-
         return false;
     }
 

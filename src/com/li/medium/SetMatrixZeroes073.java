@@ -1,86 +1,91 @@
 package com.li.medium;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 73. 矩阵置零
- *
  * 给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。
  *
  * 示例 1：
- * 输入：matrix = [[1,1,1],[1,0,1],[1,1,1]]
- * 输出：[[1,0,1],[0,0,0],[1,0,1]]
+ * 输入：matrix = [
+ * [1,1,1],
+ * [1,0,1],
+ * [1,1,1]
+ * ]
+ * 输出：[
+ * [1,0,1],
+ * [0,0,0],
+ * [1,0,1]
+ * ]
  *
  * 示例 2：
- * 输入：matrix = [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
- * 输出：[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+ * 输入：matrix = [
+ * [0,1,2,0],
+ * [3,4,5,2],
+ * [1,3,1,5]]
+ * 输出：[
+ * [0,0,0,0],
+ * [0,4,5,0],
+ * [0,3,1,0]]
+ *
  *
  * 提示：
- *
  * m == matrix.length
  * n == matrix[0].length
  * 1 <= m, n <= 200
  * -2^31 <= matrix[i][j] <= 2^31 - 1
  *
- * 进阶：
  *
+ * 进阶：
  * 一个直观的解决方案是使用  O(mn) 的额外空间，但这并不是一个好的解决方案。
  * 一个简单的改进方案是使用 O(m + n) 的额外空间，但这仍然不是最好的解决方案。
  * 你能想出一个仅使用常量空间的解决方案吗？
  *
- * @author kang
  */
 public class SetMatrixZeroes073 {
 
     public static void main(String[] args) {
-        int[][] matrix0 = {{1, 0}};
-        int[][] matrix = {{0, 2, 3}, {4, 0, 6}};
-        int[][] matrix2 = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
-        int[][] matrix3 = {
-                {1, 2, 3, 4},
-                {5, 0, 7, 8},
-                {0,10,11,12},
-                {13,14,15,0}};
-        int[][] matrix4 = {
-                {0,1,2,0},
-                {3,4,5,2},
-                {1,3,1,5}
+        int[][][] matrixArr = {
+                {
+                        {1, 1, 1},
+                        {1, 0, 1},
+                        {1, 1, 1}
+                },//[[1,0,1],[0,0,0],[1,0,1]]
+                {
+                        {0, 1, 2, 0},
+                        {3, 4, 5, 2},
+                        {1, 3, 1, 5}
+                }//[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
         };
-
-        int[][] matrix5 = {
-                {-4,-2147483648, 6,-7,  0},
-                {-8,          6,-8,-6,  0},
-                {2147483647,  2,-9,-6,-10}};
-
-//        setZeroes0(matrix2);
-//        setZeroes1(matrix4);
-        setZeroes2(matrix5);
-
-        for (int[] row : matrix5) {
-            for (int num : row) {
-                System.out.print(num);
-                System.out.print(",");
+        for (int[][] matrix : matrixArr) {
+//            setZeroes(matrix);
+            setZeroesOfficial(matrix);
+            System.out.println("[");
+            for (int[] row : matrix) {
+                for (int num : row) {
+                    System.out.print(num + " ");
+                }
+                System.out.println();
             }
-            System.out.println();
+            System.out.println("]");
         }
-
     }
 
     /**
-     * O(1)额外空间
-     * 第一列左上角用于标记行是否为0, 第二列用于标记列是否为0
-     *
-     * @param matrix 待置零数组
+     * 官方：第一列标识是否赋0，但刷新时需要行倒序以防止(0,0)被提前覆盖。
+     * time:O(MN), space:O(1)
      */
-    public static void setZeroes2(int[][] matrix) {
+    public static void setZeroesOfficial(int[][] matrix) {
         int m = matrix.length;
         int n = matrix[0].length;
+        boolean column0 = false;
 
-        boolean column0Flag = false;
         for (int i = 0; i < m; i++) {
-            if(matrix[i][0] == 0){
-                column0Flag =true;
+            if (matrix[i][0] == 0) {
+                column0 = true;
             }
             for (int j = 1; j < n; j++) {
                 if (matrix[i][j] == 0) {
@@ -91,12 +96,49 @@ public class SetMatrixZeroes073 {
 
         for (int i = m - 1; i >= 0; i--) {
             for (int j = 1; j < n; j++) {
-                if (matrix[0][j] == 0 || matrix[i][0] == 0) {
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
                     matrix[i][j] = 0;
                 }
             }
-            if(column0Flag){
+            if (column0) {
                 matrix[i][0] = 0;
+            }
+        }
+    }
+
+    /**
+     * 自解：遍历找出0的index，再依次置零。
+     * time:O(MN), space:O(MN)
+     */
+    public static void setZeroes(int[][] matrix) {
+        Map<Integer, List<Integer>> zeroMap = new HashMap<>();
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    List<Integer> columnList = zeroMap.getOrDefault(i, new ArrayList<>());
+                    columnList.add(j);
+                    zeroMap.put(i, columnList);
+                }
+            }
+        }
+
+        if (zeroMap.isEmpty()) {
+            return;
+        }
+
+        for (Map.Entry<Integer, List<Integer>> entrySet : zeroMap.entrySet()) {
+            for (int j = 0; j < n; j++) {
+                matrix[entrySet.getKey()][j] = 0;
+            }
+            List<Integer> columnList = entrySet.getValue();
+            for (int column : columnList) {
+                for (int i = 0; i < m; i++) {
+                    matrix[i][column] = 0;
+                }
             }
         }
     }
