@@ -4,7 +4,6 @@ import java.util.*;
 
 /**
  * 15. 三数之和
- * 提示
  * 给你一个整数数组 nums ，判断是否存在三元组 [nums[i], nums[j],
  * nums[k]] 满足 i != j、i != k 且 j != k ，同时还满足 nums[i] + nums[j] + nums[k] == 0 。
  * 请你返回所有和为 0 且不重复的三元组。
@@ -48,7 +47,8 @@ public class ThreeSum015 {
                 {-2,0,0,2,2}//[[-2,0,2]]
         };
         for (int[] num : nums) {
-            List<List<Integer>> resList = threeSum(num);
+            List<List<Integer>> resList = threeSumOfficial(num);
+//            List<List<Integer>> resList = threeSum(num);
             System.out.print("[");
             for (List<Integer> res : resList) {
                 System.out.print("[");
@@ -60,6 +60,42 @@ public class ThreeSum015 {
             System.out.print("]");
             System.out.println();
         }
+    }
+
+    /**
+     * 官方：排序+去重+遍历
+     * time:O(N2), space:O(logN)
+     */
+    public static List<List<Integer>> threeSumOfficial(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+
+        List<List<Integer>> res = new ArrayList<>();
+        for (int first = 0; first < n; first++) {
+            if (first > 0 && nums[first] == nums[first - 1]) {
+                continue;
+            }
+
+            int target = -nums[first];
+            int third = n - 1;
+            for (int second = first + 1; second < n; second++) {
+                if (second > first + 1 && nums[second] == nums[second - 1]) {
+                    continue;
+                }
+
+                while (second < third && (nums[second] + nums[third]) > target) {
+                    third--;
+                }
+
+                if (second == third) {
+                    break;
+                }
+                if (nums[second] + nums[third] == target) {
+                    res.add(Arrays.asList(nums[first], nums[second], nums[third]));
+                }
+            }
+        }
+        return res;
     }
 
     /**
